@@ -1,3 +1,8 @@
+-- Plugins
+
+require("no-status"):setup()
+require("git"):setup { order = 1500 }
+
 -- Linemode
 
 function Linemode:size_and_mtime()
@@ -30,20 +35,4 @@ function Linemode:size_and_mtime()
     end
 
     return string.format("%s %s", readable_size, time)
-end
-
--- Full path
-
-function Status:name()
-  local h = cx.active.current.hovered
-  if not h then return ui.Span("") end
-
-  local path = tostring(h.url)
-
-  local home = os.getenv("HOME")
-  if home and path:sub(1, #home) == home then
-    path = " ~" .. path:sub(#home + 1)
-  end
-
-  return ui.Span(path)
 end

@@ -3,5 +3,15 @@ use = "yazi-rs/plugins:mount"
 rev = "58c4f4e"
 hash = "b95f898e6dc60b52edbc415952e14395"
 
+[[plugin.deps]]
+use = "yazi-rs/plugins:no-status"
+rev = "58c4f4e"
+hash = "3e023d31f29201efdac2a6ae35fedb78"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:git"
+rev = "58c4f4e"
+hash = "5bb0bfab901d3601c370eafdd66edd31"
+
 [flavor]
 deps = []

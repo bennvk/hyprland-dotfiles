@@ -125,7 +125,7 @@ exts = [
 	{ name = "png", text = "󰋩", fg = "#c882e7" },
 	{ name = "rar", text = "", fg = "#ffaf00" },
 	{ name = "sh", text = "", fg = "#4caf50" },
-  	{ name = "py", text = "", fg = "#3a6c95" },
+  { name = "py", text = "", fg = "#3a6c95" },
 	{ name = "tar", text = "", fg = "#ffaf00" },
 	{ name = "gz", text = "", fg = "#ffaf00" },
 	{ name = "toml", text = "", fg = "#6d8086" },
@@ -133,3 +133,16 @@ exts = [
 	{ name = "zip", text = "", fg = "#ffaf00" },
 	{ name = "trashinfo", text = "", fg = "#E0D8D6" },
 ]
+
+### PLUGINS ###
+
+[git]
+unknown_sign = "?"
+ignored_sign = ""
+untracked_sign = "?"
+unstaged_sign = "✎"
+staged_sign = "+"
+added_sign = "+"
+deleted_sign = "x"
+updated_sign = "✎"
+clean_sign = ""
