@@ -137,7 +137,7 @@ exts = [
 ### PLUGINS ###
 
 [git]
-unknown_sign = "?"
+unknown_sign = ""
 ignored_sign = ""
 untracked_sign = "?"
 unstaged_sign = "✎"
