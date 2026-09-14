@@ -1,10 +1,10 @@
 [mgr]
 prepend_keymap = [
   { on = "!",       run = "shell --orphan kitty", desc = "Ouvrir un terminal ici" },
-  { on = "q",       run = "close", desc = "Fermer l'onglet" },
-  { on = "o", run = "open",               desc = "Ouvrir le(s) fichier(s)" },
-  { on = "O", run = "open --interactive", desc = "Choisir l'ouvreur" },
-  { on = "M", run = "plugin mount", desc = "Ouvrir le gestionnaire de montage" },
+  { on = "q",       run = "close",                desc = "Fermer l'onglet" },
+  { on = "o",       run = "open",                 desc = "Ouvrir le(s) fichier(s)" },
+  { on = "O",       run = "open --interactive",   desc = "Choisir l'ouvreur" },
+  { on = "M",       run = "plugin mount",         desc = "Ouvrir le gestionnaire de montage" },
   { on = "<Enter>", run = '''shell '
     case "$0" in
       *.sh)  bash "$0" ;;
@@ -14,4 +14,6 @@ prepend_keymap = [
       *)     xdg-open "$0" ;;
     esac
   ' --block''', desc = "Exécuter ou ouvrir le fichier" },
+  { on   = "+",     run  = "plugin zoom 1",       desc = "Zoom in" },
+  { on   = "-",     run  = "plugin zoom -1",      desc = "Zoom out" },
 ]

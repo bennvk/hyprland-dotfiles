@@ -137,6 +137,14 @@ exts = [
 ### PLUGINS ###
 
 [git]
+untracked  = { fg = "cyan" }
+unstaged   = { fg = "yellow" }
+staged     = { fg = "green" }
+added      = { fg = "green" }
+deleted    = { fg = "red" }
+updated    = { fg = "yellow" }
+clean      = { fg = "green" }
+
 unknown_sign = ""
 ignored_sign = ""
 untracked_sign = "?"

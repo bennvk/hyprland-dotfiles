@@ -9,9 +9,9 @@ rev = "58c4f4e"
 hash = "3e023d31f29201efdac2a6ae35fedb78"
 
 [[plugin.deps]]
-use = "yazi-rs/plugins:git"
+use = "yazi-rs/plugins:zoom"
 rev = "58c4f4e"
-hash = "5bb0bfab901d3601c370eafdd66edd31"
+hash = "83bb4de74060a850749189645413fcae"
 
 [flavor]
 deps = []
