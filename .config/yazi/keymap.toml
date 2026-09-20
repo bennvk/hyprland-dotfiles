@@ -5,15 +5,6 @@ prepend_keymap = [
   { on = "o",       run = "open",                 desc = "Ouvrir le(s) fichier(s)" },
   { on = "O",       run = "open --interactive",   desc = "Choisir l'ouvreur" },
   { on = "M",       run = "plugin mount",         desc = "Ouvrir le gestionnaire de montage" },
-  { on = "<Enter>", run = '''shell '
-    case "$0" in
-      *.sh)  bash "$0" ;;
-      *.py)  python "$0" ;;
-      *.js)  node "$0" ;;
-      *.lua) lua "$0" ;;
-      *)     xdg-open "$0" ;;
-    esac
-  ' --block''', desc = "Exécuter ou ouvrir le fichier" },
-  { on   = "+",     run  = "plugin zoom 1",       desc = "Zoom in" },
-  { on   = "-",     run  = "plugin zoom -1",      desc = "Zoom out" },
+  { on = "+",       run  = "plugin zoom 1",       desc = "Zoom in" },
+  { on = "-",       run  = "plugin zoom -1",      desc = "Zoom out" },
 ]

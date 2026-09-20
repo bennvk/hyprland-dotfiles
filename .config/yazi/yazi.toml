@@ -8,17 +8,27 @@ max_height = 750
 
 [opener]
 edit = [
-  { run = "$EDITOR %s",  block = true,  desc = "Neovim" },
-  { run = "codium %s",   orphan = true, desc = "VSCodium" },
+  { run = "$EDITOR %s",   block = true,   desc = "Neovim" },
+  { run = "codium %s",    orphan = true,  desc = "VSCodium" },
 ]
 extract = [
-  { run = '7z x "%s" -y', desc = "7-Zip", block = false }
+  { run = '7z x "%s" -y', block = false,  desc = "7-Zip" }
+]
+python = [
+  { run = "$EDITOR %s",   block = true,   desc = "Neovim" },
+  { run = "codium %s",    orphan = true,  desc = "VSCodium" },
+  { run = "python3 %s",   desc = "Exécuter"},
+]
+bash = [
+  { run = "$EDITOR %s",   block = true,   desc = "Neovim" },
+  { run = "codium %s",    orphan = true,  desc = "VSCodium" },
+  { run = "bash %s",      desc = "Exécuter"},
 ]
 view_image = [
-  { run = "swayimg %s",  orphan = true, desc = "Swayimg" },
+  { run = "swayimg %s",   orphan = true,  desc = "Swayimg" },
 ]
 view_document = [
-  { run = '$BROWSER %s', orphan = true, desc = "Firefox" },
+  { run = '$BROWSER %s',  orphan = true,  desc = "Firefox" },
 ]
 
 [open]
@@ -50,10 +60,10 @@ rules = [
   { url = "*.markdown", use = "edit" },
   { url = "*.json",     use = "edit" },
   { url = "*.jsonc",    use = "edit" },
-  { url = "*.sh",       use = "edit" },
+  { url = "*.sh",       use = "bash" },
   { url = "*.bash",     use = "edit" },
   { url = "*.zsh",      use = "edit" },
-  { url = "*.py",       use = "edit" },
+  { url = "*.py",       use = "python" },
   { url = "*.toml",     use = "edit" },
   { url = "*.yaml",     use = "edit" },
   { url = "*.yml",      use = "edit" },
@@ -88,13 +98,3 @@ rules = [
   { url = "*.log",      use = "edit" },
   { url = "*",          use = "edit" },
 ]
-
-[[plugin.prepend_fetchers]]
-  url   = "*"
-  run   = "git"
-  group = "git"
-
-[[plugin.prepend_fetchers]]
-  url   = "*/"
-  run   = "git"
-  group = "git"
