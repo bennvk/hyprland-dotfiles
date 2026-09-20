@@ -15,13 +15,9 @@ extract = [
   { run = '7z x "%s" -y', block = false,  desc = "7-Zip" }
 ]
 python = [
-  { run = "$EDITOR %s",   block = true,   desc = "Neovim" },
-  { run = "codium %s",    orphan = true,  desc = "VSCodium" },
   { run = "python3 %s",   desc = "Exécuter"},
 ]
 bash = [
-  { run = "$EDITOR %s",   block = true,   desc = "Neovim" },
-  { run = "codium %s",    orphan = true,  desc = "VSCodium" },
   { run = "bash %s",      desc = "Exécuter"},
 ]
 view_image = [
@@ -60,10 +56,10 @@ rules = [
   { url = "*.markdown", use = "edit" },
   { url = "*.json",     use = "edit" },
   { url = "*.jsonc",    use = "edit" },
-  { url = "*.sh",       use = "bash" },
+  { url = "*.sh",       use = [ "edit", "bash" ] },
   { url = "*.bash",     use = "edit" },
   { url = "*.zsh",      use = "edit" },
-  { url = "*.py",       use = "python" },
+  { url = "*.py",       use = [ "edit", "python" ] },
   { url = "*.toml",     use = "edit" },
   { url = "*.yaml",     use = "edit" },
   { url = "*.yml",      use = "edit" },
