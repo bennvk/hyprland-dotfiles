@@ -12,7 +12,7 @@ edit = [
   { run = "codium %s",    orphan = true,  desc = "VSCodium" },
 ]
 extract = [
-  { run = '7z x "%s" -y', block = false,  desc = "7-Zip" }
+  { run = "7z x %s -y",   desc = "7-Zip", block = false }
 ]
 python = [
   { run = "python3 %s",   desc = "Exécuter"},
