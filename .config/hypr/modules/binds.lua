@@ -14,6 +14,7 @@ hl.bind("SUPER + W", hl.dsp.exec_cmd("kitty yazi"))
 hl.bind("SUPER + E", hl.dsp.window.close(activewindow))
 hl.bind("SUPER + SHIFT + E", hl.dsp.window.kill())
 hl.bind("SUPER + R", hl.dsp.exec_cmd("rofi -show drun"))
+hl.bind("SUPER + M", hl.dsp.exec_cmd("bash ~/.config/rofi/profiles-menu/profiles-menu.sh"))
 hl.bind("SUPER + L", hl.dsp.exec_cmd("bash ~/.config/rofi/power-menu/power-menu.sh"))
 hl.bind("SUPER + SPACE", hl.dsp.exec_cmd("bash ~/.config/waybar/modules-scripts/toggle-waybar.sh"))
 
