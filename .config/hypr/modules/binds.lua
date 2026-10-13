@@ -38,6 +38,8 @@ for i = 1, 10 do
     hl.bind("SUPER + " .. key, hl.dsp.focus({ workspace = i}))
     hl.bind("SUPER + SHIFT + " .. key, hl.dsp.window.move({ workspace = i , follow = false}))
 end
+hl.bind("SUPER + mouse:275", hl.dsp.focus({ workspace = "r-1" }), { mouse = true })
+hl.bind("SUPER + mouse:276", hl.dsp.focus({ workspace = "r+1" }), { mouse = true })
 
 -- Screenshot
 hl.bind("SUPER + P", hl.dsp.exec_cmd(
