@@ -77,10 +77,10 @@
 },
 
 "pulseaudio": {
+    "tooltip": false,
     "on-click": "pavucontrol",
     "on-scroll-up": "pactl set-sink-volume @DEFAULT_SINK@ +5%",
     "on-scroll-down": "pactl set-sink-volume @DEFAULT_SINK@ -5%",
-    "tooltip-format": "{desc}  -  {volume}%",
     "format": "{icon}",
     "format-bluetooth": "{icon}",
     "format-bluetooth-muted": "{icon}",
@@ -140,11 +140,10 @@
 },
 
 "network": {
+    "tooltip": false,
     "on-click": "~/.config/rofi/wifi-menu/wifi-menu.sh",
     "format-wifi": "{essid} ",
     "format-ethernet": "Ethernet  ",
-    "tooltip-format-wifi": "{essid}  -  {ipaddr} /{cidr}",
-    "tooltip-format-ethernet": "Ethernet  -  {ipaddr} /{cidr}",
     "format-disconnected": "Déconnecté ⚠",
     "format-disabled": "Déconnecté ⚠"
 },
@@ -155,10 +154,7 @@
     "warning": 30,
     "critical": 15
 },
-    "tooltip": true,
-    "tooltip-format-full": "Batterie chargée",
-    "tooltip-format": "Batterie vide dans {time}",
-    "tooltip-format-charging": "Batterie chargée dans {time}",
+    "tooltip": false,
     "format": "{capacity}% {icon}",
     "format-full": "{capacity}% 󱐋",
     "format-charging": "{capacity}% ",
