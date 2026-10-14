@@ -207,11 +207,20 @@ window#waybar {
     color: #0a9418;
 }
 
-#battery.critical:not(.charging) {   
-    font-size: 12.5px;
-    color: #990F02;
+@keyframes blink-critical {
+    0%   { color: #990F02; }
+    50%  { color: #ff3b30; text-shadow: 0 0 8px rgba(255, 59, 48, 0.6); }
+    100% { color: #990F02; }
 }
 
+#battery.critical:not(.charging) {
+    font-size: 12.5px;
+    color: #990F02;
+    animation-name: blink-critical;
+    animation-duration: 1.2s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+}
 #battery.full {   
     font-size: 12.5px;
     color: #FBE106;
