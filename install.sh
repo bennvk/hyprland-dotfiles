@@ -20,7 +20,7 @@ pacman_pkgs=(
   hyprland awww firefox rofi
   kitty zsh zsh-completions
   hyprlock papirus-icon-theme
-  starship fastfetchu disks2
+  starship fastfetch udisks2
   neovim mako yazi resvg galculator
   grim slurp wl-clipboard cliphist
   brightnessctl ddcutil swayimg 7zip
