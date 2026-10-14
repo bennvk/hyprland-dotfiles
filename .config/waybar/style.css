@@ -12,7 +12,6 @@
 
 * {
     font-family: Inter, Symbols Nerd Font;
-    font-size: 12.5px;
     font-weight: 600;
     border-radius: 18px;
 }
@@ -20,7 +19,7 @@
 .modules-left,
 .modules-center,
 .modules-right {
-  margin: 12px 10px 0px 0px;
+    margin: 12px 10px 0px 0px;
 }
 
 #custom-os_button,
@@ -49,19 +48,21 @@ window#waybar {
 }
 
 #custom-os_button {
-    font-size: 1.3rem;
+    font-size: 16px;
     padding: 8px 13px;
     margin-left: 15px;
     margin-right: 4px;
 }
 
 #workspaces {
+    font-size: 12.5px;
     padding: 8px 11px;
     margin-left: 4px;
     margin-right: 4px;
 }
 
 #workspaces button {
+    font-size: 12.5px;
     padding: 0px 5px;
     margin: 0px 2px;
     border: none;
@@ -71,6 +72,7 @@ window#waybar {
 }
 
 #workspaces button:hover {
+    font-size: 12.5px;
     border: none;
     box-shadow: none;
     text-decoration: none;
@@ -78,6 +80,7 @@ window#waybar {
 }
 
 #workspaces button.visible {
+    font-size: 12.5px;
     padding: 0px 8px;
     background: #ffffff;
     border-radius: 14px;
@@ -85,25 +88,30 @@ window#waybar {
 }
 
 #workspaces button.empty {
+    font-size: 12.5px;
     color: #bbbbbb;
 }
 
 #custom-musicplayer {
+    font-size: 12.5px;
     padding: 8px 14px;
     margin-left: 4px;
     margin-right: 4px;
 }
 
 #taskbar {
+    font-size: 12.5px;
     padding: 0px 8px;
 }
 
 #taskbar button {
+    font-size: 12.5px;
     padding: 0px 5px;
     border: none;
 }
 
 #taskbar button:hover, #taskbar.empty{
+    font-size: 12.5px;
     border: none;
     box-shadow: none;
     text-decoration: none;
@@ -112,6 +120,7 @@ window#waybar {
 }
 
 #pulseaudio {
+    font-size: 12.5px;
     padding: 8px 18px;
     font-size: 18px;
     transition: all 0.5s ease-in-out;
@@ -119,17 +128,20 @@ window#waybar {
 }
 
 #pulseaudio-slider {
+    font-size: 12.5px;
     min-height: 5px;
     margin-left: 8px;
     transition: all 0.5s ease-in-out;
 }
 
 #pulseaudio-slider slider {   
+    font-size: 12.5px;
     background: transparent;
     box-shadow: none;
 }
 
 #pulseaudio-slider trough {
+    font-size: 12.5px;
     min-height: 6px;
     min-width: 80px;
     margin: 0px 8px;
@@ -139,11 +151,13 @@ window#waybar {
 }
 
 #pulseaudio-slider highlight {
+    font-size: 12.5px;
     background: #ffffff;
     border-color: #ffffff;
 }
 
 #custom-cpu {
+    font-size: 12.5px;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
     padding-right: 8px;
@@ -152,6 +166,7 @@ window#waybar {
 }
 
 #custom-gpuNmemory {
+    font-size: 12.5px;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
     padding-left: 8px;
@@ -162,6 +177,7 @@ window#waybar {
 #network, 
 #network.disconnected, 
 #network.disabled {
+    font-size: 12.5px;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
     padding-left: 18px;
@@ -171,6 +187,7 @@ window#waybar {
 
 #network.disconnected,
 #network.disabled {
+    font-size: 12.5px;
     color: #990F02;
 }
 
@@ -179,24 +196,29 @@ window#waybar {
 #battery.plugged,
 #battery.critical:not(.charging),
 #battery.full {
+    font-size: 12.5px;
     padding-left: 8px;
     border-radius: 0;
     padding-right: 8px;
 }
 
 #battery.charging, #battery.plugged {
+    font-size: 12.5px;
     color: #0a9418;
 }
 
 #battery.critical:not(.charging) {   
+    font-size: 12.5px;
     color: #990F02;
 }
 
 #battery.full {   
+    font-size: 12.5px;
     color: #FBE106;
 }
 
 #clock {
+    font-size: 12.5px;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
     padding-left: 8px;
@@ -205,12 +227,14 @@ window#waybar {
 }
 
 #custom-power {
+    font-size: 12.5px;
     padding: 8px 16px;
     margin-left: 4px;
     margin-right: 4px;
 }
 
 #custom-separator {
+    font-size: 12.5px;
     border-radius: 0;
 }
 
