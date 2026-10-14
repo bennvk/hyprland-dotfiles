@@ -26,7 +26,7 @@ pacman_pkgs=(
   brightnessctl ddcutil swayimg 7zip
   cpupower pavucontrol ufw jq 
   inter-font ttf-cascadia-code
-  ttf-nerd-fonts-symbols python-pywal
+  ttf-nerd-fonts-symbols
   xdg-desktop-portal-hyprland
   xdg-desktop-portal-gtk
 )
@@ -46,7 +46,7 @@ echo "=== Installation des paquets AUR ==="
 
 yay_pkgs=(
   waybar-git
-  python-pywalfox
+  python-pywalfox python-pywal
   dracula-gtk-theme
   vscodium-bin
   bibata-cursor-theme-bin
