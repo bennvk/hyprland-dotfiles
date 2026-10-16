@@ -1,5 +1,4 @@
 
---
 --   _              _     _           _     
 --  | | _____ _   _| |__ (_)_ __   __| |___ 
 --  | |/ / _ \ | | | '_ \| | '_ \ / _` / __|
@@ -50,10 +49,36 @@ hl.bind("SUPER + SHIFT + P", hl.dsp.exec_cmd(
 ))
 
 -- Brightness
-hl.bind("SUPER + bracketleft", hl.dsp.exec_cmd("~/.config/hypr/scripts/brightness-control.sh down"))
-hl.bind("SUPER + bracketright", hl.dsp.exec_cmd("~/.config/hypr/scripts/brightness-control.sh up"))
-hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd("~/.config/hypr/scripts/brightness-control.sh down"))
-hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("~/.config/hypr/scripts/brightness-control.sh up"))
+local BRIGHTNESS_SCRIPT = "~/.config/hypr/scripts/brightness-control.sh"
+
+local brightness_monitors = {
+    ["eDP-1"] = { backend = "brightnessctl" },
+    ["DP-1"]  = { backend = "ddcutil", serial = "AH15434Z00862" },
+}
+
+local function brightness(action)
+    return function()
+        local monitor = hl.get_monitor_at_cursor()
+        local name = monitor and monitor.name or "inconnu"
+        local cfg = brightness_monitors[name]
+
+        if not cfg then
+            hl.dispatch(hl.dsp.exec_cmd(
+                "notify-send -a osd-panel 'Luminosité' 'Écran non configuré : " .. name .. "'"
+            ))
+            return
+        end
+
+        hl.dispatch(hl.dsp.exec_cmd(
+            string.format("%s %s %s %s", BRIGHTNESS_SCRIPT, action, cfg.backend, cfg.serial or "")
+        ))
+    end
+end
+
+hl.bind("SUPER + bracketleft",   brightness("down"))
+hl.bind("SUPER + bracketright",  brightness("up"))
+hl.bind("XF86MonBrightnessDown", brightness("down"), { locked = true })
+hl.bind("XF86MonBrightnessUp",   brightness("up"),   { locked = true })
 
 -- Media
 hl.bind("SUPER + F5", hl.dsp.exec_cmd("playerctl previous"))

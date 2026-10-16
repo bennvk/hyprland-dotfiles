@@ -1,85 +1,75 @@
 #!/bin/bash
 
-STEP=25
 ACTION="$1"
+BACKEND="$2"
+DDC_SN="$3"
 
-mouse_pos=$(hyprctl cursorpos)
-mouse_x=${mouse_pos%,*}
+DDC_STEP=25          # pas en % pour ddcutil
+BC_STEP_DIVIDER=20   # brightnessctl : pas = max / 20 (soit 5 %)
+ICON_DIR="$HOME/.config/mako/icons"
 
-THRESHOLD=1920
+usage() {
+    echo "Usage : $0 up|down brightnessctl|ddcutil [display]" >&2
+    exit 1
+}
 
-if (( mouse_x > THRESHOLD )); then
-    MAX=$(brightnessctl m)
-    STEP_BC=$(( MAX / 20 ))
-    CURRENT=$(brightnessctl g)
+[[ "$ACTION" == "up" || "$ACTION" == "down" ]] || usage
 
+compute_new() {
+    local current=$1 step=$2 max=$3 new
     if [[ "$ACTION" == "up" ]]; then
-        NEW=$((CURRENT + STEP_BC))
-    elif [[ "$ACTION" == "down" ]]; then
-        NEW=$((CURRENT - STEP_BC))
+        new=$(( current + step ))
     else
-        echo "Usage : $0 up|down"
-        exit 1
+        new=$(( current - step ))
+    fi
+    (( new < 0 )) && new=0
+    (( new > max )) && new=$max
+    echo "$new"
+}
+
+notify() {
+    local percent=$1 icon
+    if   (( percent == 0 ));  then icon="$ICON_DIR/brightness-zero.png"
+    elif (( percent <= 25 )); then icon="$ICON_DIR/brightness-low.png"
+    elif (( percent <= 50 )); then icon="$ICON_DIR/brightness-medium.png"
+    elif (( percent <= 75 )); then icon="$ICON_DIR/brightness-high.png"
+    else                           icon="$ICON_DIR/brightness-max.png"
     fi
 
-    (( NEW < 0 )) && NEW=0
-    (( NEW > MAX )) && NEW=$MAX
-
-    PERCENT=$(( NEW * 100 / MAX ))
-
-    if (( PERCENT == 0 )); then
-        ICON="$HOME/.config/mako/icons/brightness-zero.png"
-    elif (( PERCENT <= 25 )); then
-        ICON="$HOME/.config/mako/icons/brightness-low.png"
-    elif (( PERCENT <= 50 )); then
-        ICON="$HOME/.config/mako/icons/brightness-medium.png"
-    elif (( PERCENT <= 75 )); then
-        ICON="$HOME/.config/mako/icons/brightness-high.png"
-    else
-        ICON="$HOME/.config/mako/icons/brightness-max.png"
-    fi
-
-    brightnessctl set "$NEW" | \
-        notify-send -i "$ICON" "$PERCENT%" \
+    notify-send -i "$icon" "${percent}%" \
         -a osd-panel \
         -e -h string:x-canonical-private-synchronous:osd
+}
 
-else
-    RAW=$(/usr/bin/ddcutil getvcp 10)
-    CURRENT=$(echo "$RAW" | grep -oP 'current value\s*=\s*\K[0-9]+')
+case "$BACKEND" in
+    brightnessctl)
+        MAX=$(brightnessctl m)
+        CURRENT=$(brightnessctl g)
+        NEW=$(compute_new "$CURRENT" $(( MAX / BC_STEP_DIVIDER )) "$MAX")
 
-    if ! [[ "$CURRENT" =~ ^[0-9]+$ ]]; then
-        echo "Erreur : impossible de récupérer la luminosité écran secondaire."
-        exit 1
-    fi
+        brightnessctl -q set "$NEW"
+        notify $(( NEW * 100 / MAX ))
+        ;;
 
-    if [[ "$ACTION" == "up" ]]; then
-        NEW=$((CURRENT + STEP))
-    elif [[ "$ACTION" == "down" ]]; then
-        NEW=$((CURRENT - STEP))
-    else
-        echo "Usage : $0 up|down"
-        exit 1
-    fi
+    ddcutil)
+        DDC_ARGS=()
+        [[ -n "$DDC_SN" ]] && DDC_ARGS=(--sn "$DDC_SN")
 
-    (( NEW < 0 )) && NEW=0
-    (( NEW > 100 )) && NEW=100
+        RAW=$(/usr/bin/ddcutil "${DDC_ARGS[@]}" getvcp 10)
+        CURRENT=$(echo "$RAW" | grep -oP 'current value\s*=\s*\K[0-9]+')
 
+        if ! [[ "$CURRENT" =~ ^[0-9]+$ ]]; then
+            notify-send -a osd-panel "Luminosité" "Impossible de lire la luminosité de l'écran externe"
+            exit 1
+        fi
 
-    if (( NEW == 0 )); then
-        ICON="$HOME/.config/mako/icons/brightness-zero.png"
-    elif (( NEW <= 25 )); then
-        ICON="$HOME/.config/mako/icons/brightness-low.png"
-    elif (( NEW <= 50 )); then
-        ICON="$HOME/.config/mako/icons/brightness-medium.png"
-    elif (( NEW <= 75 )); then
-        ICON="$HOME/.config/mako/icons/brightness-high.png"
-    else
-        ICON="$HOME/.config/mako/icons/brightness-max.png"
-    fi
+        NEW=$(compute_new "$CURRENT" "$DDC_STEP" 100)
 
-    ddcutil setvcp 10 "$NEW" | \
-        notify-send -i "$ICON" "$NEW%" \
-        -a osd-panel \
-        -e -h string:x-canonical-private-synchronous:osd
-fi
+        /usr/bin/ddcutil "${DDC_ARGS[@]}" setvcp 10 "$NEW"
+        notify "$NEW"
+        ;;
+
+    *)
+        usage
+        ;;
+esac
