@@ -56,11 +56,11 @@ hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd("~/.config/hypr/scripts/control.d
 
 -- Media
 hl.bind("SUPER + F5", hl.dsp.exec_cmd("playerctl previous"))
-hl.bind("SUPER + F6", hl.dsp.exec_cmd("~/.config/hypr/scripts/volume-control.sh down"))
-hl.bind("SUPER + F7", hl.dsp.exec_cmd("~/.config/hypr/scripts/volume-control.sh up"))
+hl.bind("SUPER + F6", hl.dsp.exec_cmd("~/.config/hypr/scripts/control.d/volume-control.sh down"))
+hl.bind("SUPER + F7", hl.dsp.exec_cmd("~/.config/hypr/scripts/control.d/volume-control.sh up"))
 hl.bind("SUPER + F8", hl.dsp.exec_cmd("playerctl next"))
-hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("~/.config/hypr/scripts/volume-control.sh up"))
-hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("~/.config/hypr/scripts/volume-control.sh down"))
+hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("~/.config/hypr/scripts/control.d/volume-control.sh down"))
+hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("~/.config/hypr/scripts/control.d/volume-control.sh up"))
 
 -- Mouse
 hl.bind("SUPER + mouse:272", hl.dsp.window.drag(),   { mouse = true })
