@@ -79,6 +79,7 @@
 "pulseaudio": {
     "tooltip": false,
     "on-click": "pavucontrol",
+    "on-click-right": "blueman-manager",
     "on-scroll-up": "pactl set-sink-volume @DEFAULT_SINK@ +5%",
     "on-scroll-down": "pactl set-sink-volume @DEFAULT_SINK@ -5%",
     "format": "{icon}",
@@ -101,6 +102,8 @@
 "pulseaudio/slider": {
     "min": 0,
     "max": 125,
+    "on-scroll-up": "pactl set-sink-volume @DEFAULT_SINK@ +5%",
+    "on-scroll-down": "pactl set-sink-volume @DEFAULT_SINK@ -5%",
     "orientation": "horizontal"
 },
 
