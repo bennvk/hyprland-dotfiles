@@ -13,11 +13,14 @@ max-icon-size=32
 border-radius=25
 border-size=2
 
-[app-name="discord"]
-invisible=1
-
 [app-name=osd-panel]
 default-timeout=2000
 padding=15,0,15,20
 outer-margin=200
 width=150
+
+[app-name=network]
+width=250
+
+[app-name=network category=offline]
+border-color=#b51b13
