@@ -65,6 +65,8 @@ rules = [
 	{ url = "*.zip", fg = "#ffaf00" },
 	{ url = "*.sh", fg = "#4caf50" },
 	{ url = "*.py", fg = "#3a6c95" },
+	{ url = "*.ics", fg = "#4285F4" },
+	{ url = "*.vcs", fg = "#4285F4" },
 ]
 
 ### ICONS ###
@@ -140,4 +142,6 @@ exts = [
 	{ name = "txt", text = "󰦨", fg = "#00afff" },
 	{ name = "zip", text = "", fg = "#ffaf00" },
 	{ name = "trashinfo", text = "", fg = "#E0D8D6" },
+	{ name = "ics", text = "󰸗", fg = "#4285F4" },
+	{ name = "vcs", text = "󰸗", fg = "#4285F4" },
 ]
