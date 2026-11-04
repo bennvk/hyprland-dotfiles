@@ -42,10 +42,10 @@ hl.bind("SUPER + mouse:276", hl.dsp.focus({ workspace = "r-1" }), { mouse = true
 
 -- Screenshot
 hl.bind("SUPER + P", hl.dsp.exec_cmd(
-    "bash -c 'grim - | tee >(wl-copy) > ~/Images/Screenshots/screenshot_$(date +%s).png'"
+    "bash -c 'grim - | tee >(wl-copy) > ~/Images/Screenshots/screenshot_$(date +%Y%m%d-%H%M%S).png'"
 ))
 hl.bind("SUPER + SHIFT + P", hl.dsp.exec_cmd(
-    "bash -c 'coords=$(slurp) && sleep 0.1 && grim -g \"$coords\" - | tee >(wl-copy) > ~/Images/Screenshots/screenshot_$(date +%s).png'"
+    "bash -c 'coords=$(slurp) && sleep 0.1 && grim -g \"$coords\" - | tee >(wl-copy) > ~/Images/Screenshots/screenshot_$(date +%Y%m%d-%H%M%S).png'"
 ))
 
 -- Brightness
