@@ -80,6 +80,27 @@ update_firefox() {
     fi
 }
 
+update_sone() {
+    if [[ ! -d "$HOME/.config/sone" ]]; then
+        notify-send "⚠️ Erreur WallSync ⚠️" "Sone : dossier de configuration introuvable"
+        return
+    fi
+
+    background=$(sed -n '1p' "$HOME/.cache/wal/colors")
+    accent=$(sed -n '5p' "$HOME/.cache/wal/colors")
+
+    cat > "$HOME/.config/sone/theme.json" <<EOF
+{
+  "version": 1,
+  "preset": "custom",
+  "custom": {
+    "accent": "$accent",
+    "background": "$background"
+  }
+}
+EOF
+}
+
 WALLPAPER="$(realpath "$1" 2>/dev/null)"
 
 if [[ -z "$WALLPAPER" || ! -f "$WALLPAPER" ]]; then
@@ -101,3 +122,4 @@ update_hyprlock
 update_rofi
 update_mako
 update_firefox
+update_sone
