@@ -10,41 +10,30 @@
 #
 
 wallpaper_dir="$HOME/Images/Wallpapers"
-preview_dir="$HOME/Images/Wallpapers/preview"
-
+preview_dir="$wallpaper_dir/preview"
+theme="$HOME/.config/rofi/wallpaper-menu/wallpaper-menu.rasi"
+ 
 mkdir -p "$preview_dir"
-
-choices=$(find "$wallpaper_dir" -type f \( -iname '*.jpg' -o -iname '*.png' -o -iname '*.jpeg' -o -iname '*.webp' \) ! -path "$preview_dir/*" | sort)
-
+ 
 list=""
 while IFS= read -r file; do
     name=$(basename "$file")
-    base="${name%.*}"
-    preview="$preview_dir/${base}_preview.jpg"
-
-    echo "Vérification de la preview : $preview"
-    if [ ! -f "$preview" ]; then
-        echo "Création de la miniature pour $file"
-        convert "$file" -resize 128x72 "$preview"
-    else
-        echo "Preview existe déjà, pas de création."
-    fi
-
+    preview="$preview_dir/${name%.*}_preview.jpg"
+ 
+    [[ -f "$preview" ]] || magick "$file" -resize 128x72 "$preview"
+ 
     list+="${name}\x00icon\x1f${preview}\n"
-done <<< "$choices"
-
-selected_line=$(printf "$list" | rofi -dmenu -theme ~/.config/rofi/wallpaper-menu/wallpaper-menu.rasi -p "Choisir un fond d'écran")
-
-selected_name=$(printf "%s" "$selected_line" | cut -d $'\x00' -f1)
-
-selected=$(printf "%s\n" "$choices" | grep "/$selected_name$")
-
-if [ -n "$selected" ]; then
-    awww img "$selected" \
-    --outputs "$monitors" \
-    --transition-type grow \
-    --transition-pos 0.25,0.5 \
-    --transition-duration 2 \
-    --transition-fps 60
-    bash -ic "~/.config/wal/wal-sync.sh '$selected'" >/dev/null 2>&1 &
+done < <(find "$wallpaper_dir" -type f \( -iname '*.jpg' -o -iname '*.png' -o -iname '*.jpeg' -o -iname '*.webp' \) ! -path "$preview_dir/*" | sort)
+ 
+selected_name=$(printf "$list" | rofi -dmenu -theme "$theme" -p "Choisir un fond d'écran")
+ 
+[[ -z "$selected_name" ]] && exit 0
+ 
+selected=$(find "$wallpaper_dir" -type f -name "$selected_name" ! -path "$preview_dir/*" | head -n 1)
+ 
+if [[ -z "$selected" ]]; then
+    notify-send "⚠️ Erreur WallSync ⚠️" "Image introuvable : $selected_name"
+    exit 1
 fi
+ 
+setsid -f bash "$HOME/.config/wal/wallsync.sh" "$selected" >/dev/null 2>&1
